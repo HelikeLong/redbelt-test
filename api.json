@@ -1,0 +1,281 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Redbelt - API Documentation",
+    "version": "1.0.0",
+    "title": "Redbelt - Test"
+  },
+  "host": "localhost",
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "Incidents"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/incidents": {
+      "post": {
+        "tags": [
+          "Incidents"
+        ],
+        "summary": "Add a new incident",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Incident informations",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Incident_Data"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Incident"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Incidents"
+        ],
+        "summary": "List incidents",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Incidents"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/incidents/{id}": {
+      "get": {
+        "tags": [
+          "Incidents"
+        ],
+        "summary": "Get an incidents",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer",
+            "required": true,
+            "description": "Incident ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Incident"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Incidents"
+        ],
+        "summary": "Update an incident",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer",
+            "required": true,
+            "description": "Incident ID"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Incident Informations",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Incident_Data"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Incident"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Incidents"
+        ],
+        "summary": "Delete an incident",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer",
+            "required": true,
+            "description": "Incident ID"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Incident": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "title": {
+          "type": "string",
+          "example": "Incident"
+        },
+        "description": {
+          "type": "string",
+          "example": "Description"
+        },
+        "critical_level": {
+          "type": "string",
+          "example": "high",
+          "enum": [
+            "high",
+            "medium",
+            "low"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "example": "alarm",
+          "enum": [
+            "alarm",
+            "fire",
+            "others"
+          ]
+        },
+        "active": {
+          "type": "string",
+          "example": "true",
+          "enum": [
+            "true",
+            "false"
+          ]
+        }
+      }
+    },
+    "Incident_Data": {
+      "type": "object",
+      "required": [
+        "title",
+        "description",
+        "critical_level",
+        "type",
+        "active"
+      ],
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "Incident"
+        },
+        "description": {
+          "type": "string",
+          "example": "Description"
+        },
+        "critical_level": {
+          "type": "string",
+          "example": "high",
+          "enum": [
+            "high",
+            "medium",
+            "low"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "example": "alarm",
+          "enum": [
+            "alarm",
+            "fire",
+            "others"
+          ]
+        },
+        "active": {
+          "type": "boolean",
+          "example": true
+        }
+      }
+    },
+    "Incidents": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Incident"
+      }
+    }
+  }
+}
