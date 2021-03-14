@@ -1,5 +1,6 @@
 import React from 'react';
 import {Button, ButtonGroup, OverlayTrigger, Table, Tooltip} from "react-bootstrap";
+import {IncidentTranslate} from '../../Helpers/IncidentTranslate'
 
 const IncidentList = props => {
     return (
@@ -19,9 +20,9 @@ const IncidentList = props => {
                     <tr key={incident.id}>
                         <td>{incident.id}</td>
                         <td>{incident.title}</td>
-                        <td>{incident.critical_level}</td>
-                        <td>{incident.type}</td>
-                        <td>{incident.active}</td>
+                        <td>{IncidentTranslate.translateCriticalLevel(incident.critical_level)}</td>
+                        <td>{IncidentTranslate.translateType(incident.type)}</td>
+                        <td>{IncidentTranslate.translateStatus(incident.active)}</td>
                         <td>
                             <ButtonGroup>
                                 <OverlayTrigger key='tooltip-edit-incident' placement='top'
