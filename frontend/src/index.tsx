@@ -1,5 +1,6 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
+// Importing the Bootstrap CSS
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import App from "./Components/App";
